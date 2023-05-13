@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
-import 'package:get/get.dart';
+import 'color.dart';
+import 'package:chat_app/screens/mobile_layout_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +18,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-
-      home: Center(child: Container(child: Text('Hello'))),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Whatsapp UI',
+        theme: ThemeData.dark().copyWith(
+          useMaterial3: true,
+          scaffoldBackgroundColor: backgroundColor,
+        ),
+        home: MobileScreenLayout());
   }
 }
