@@ -1,16 +1,18 @@
+import 'package:chat_app/router.dart%20';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
-import 'color.dart';
+import 'common/utils/color.dart';
 import 'package:chat_app/screens/mobile_layout_screen.dart';
-import 'features/landing/screens/landing_sreen.dart';
+import 'package:chat_app/features/landing/screens/landing_sreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,9 +25,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Whatsapp UI',
         theme: ThemeData.dark().copyWith(
-          useMaterial3: true,
-          scaffoldBackgroundColor: backgroundColor,
-        ),
+            useMaterial3: true,
+            scaffoldBackgroundColor: backgroundColor,
+            appBarTheme: const AppBarTheme(color: appBarColor)),
+        onGenerateRoute: (settings) => generateRoute(settings),
         home: LandingScreen());
   }
 }

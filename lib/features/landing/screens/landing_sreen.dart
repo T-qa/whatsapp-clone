@@ -1,8 +1,14 @@
-import 'package:chat_app/color.dart';
+import 'package:chat_app/common/utils/color.dart';
+import 'package:chat_app/common/widgets/custom_button.dart';
+import 'package:chat_app/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
+
+  void navigateToLoginScreen(BuildContext context) {
+    Navigator.pushNamed(context, LoginScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +39,9 @@ class LandingScreen extends StatelessWidget {
           ),
           SizedBox(
             width: 280,
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: buttonColor,
-                    foregroundColor: blackColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.zero)),
-                onPressed: () {},
-                child: const Text('AGREE AND CONTINUE')),
+            child: CustomButton(
+              onPressed: () => navigateToLoginScreen(context), buttonText: 'AGEE AND CONTINUE',
+            ),
           )
         ],
       )),

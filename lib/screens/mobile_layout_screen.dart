@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../color.dart';
+import '../common/utils/color.dart';
 
 class MobileScreenLayout extends StatelessWidget {
   const MobileScreenLayout({super.key});
