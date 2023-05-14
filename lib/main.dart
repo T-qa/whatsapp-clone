@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'color.dart';
 import 'package:chat_app/screens/mobile_layout_screen.dart';
+import 'features/landing/screens/landing_sreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           scaffoldBackgroundColor: backgroundColor,
         ),
-        home: MobileScreenLayout());
+        home: LandingScreen());
   }
 }
