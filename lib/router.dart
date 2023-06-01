@@ -13,15 +13,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case OTPScreen.routeName:
       final verificationId = settings.arguments as String;
       return MaterialPageRoute(
-        builder: (context) => OTPScreen(verificationId: verificationId,),
+        builder: (context) => OTPScreen(
+          verificationId: verificationId,
+        ),
       );
-        case UserInformationScreen.routeName:
+    case UserInformationScreen.routeName:
       return MaterialPageRoute(
-        builder: (context) => const UserInformationScreen(),
-      );
+          builder: (context) => const UserInformationScreen());
     default:
       return MaterialPageRoute(
-        builder: (context) => const ErrorScreen(),
+        builder: (context) => const Scaffold(body: ErrorScreen(error: 'This page doesn\'t exist'))
       );
   }
 }

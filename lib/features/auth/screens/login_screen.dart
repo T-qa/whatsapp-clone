@@ -15,13 +15,13 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final phoneController = TextEditingController();
+  final _phoneController = TextEditingController();
   Country? selectedCountry;
 
   @override
   void dispose() {
     super.dispose();
-    phoneController.dispose();
+    _phoneController.dispose();
   }
 
   void pickCountry() {
@@ -30,7 +30,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       countryListTheme: CountryListThemeData(
         flagSize: 25,
         backgroundColor: backgroundColor,
-        textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
+        textStyle: const TextStyle(
+          fontSize: 16,
+          color: Colors.blueGrey,
+        ),
         bottomSheetHeight: 500,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
@@ -57,7 +60,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void sendPhoneNumber() {
-    String phoneNumber = phoneController.text.trim();
+    String phoneNumber = _phoneController.text.trim();
     if (selectedCountry != null && phoneNumber.isNotEmpty) {
       ref.read(authControllerProvider).signInWithPhone(
           context, '+${selectedCountry!.phoneCode}$phoneNumber');
@@ -79,23 +82,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           padding: const EdgeInsets.all(18.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            const Text('Whatsapp will need to verify your phone number'),
-            const SizedBox(height: 10),
+            const Text(
+              'Whatsapp will need to verify your phone number',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             TextButton(
-                onPressed: pickCountry, child: const Text('Pick Country')),
-            const SizedBox(height: 5),
+              onPressed: pickCountry,
+              child: const Text('Pick Country'),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (selectedCountry != null)
-                  Text('+${selectedCountry!.phoneCode}'),
+                  Text(
+                      '${selectedCountry!.flagEmoji} +${selectedCountry!.phoneCode}'),
                 const SizedBox(width: 10),
                 SizedBox(
                   width: 280,
-                  child: TextField(
+                  child: TextFormField(
                     keyboardType: TextInputType.phone,
-                    controller: phoneController,
-                    decoration: const InputDecoration(hintText: 'phone number'),
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter phone number',
+                      enabledBorder: OutlineInputBorder(),
+                    ),
                   ),
                 ),
               ],
@@ -104,8 +119,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               height: 440,
             ),
             SizedBox(
-              child:
-                  CustomButton(buttonText: 'Next', onPressed: sendPhoneNumber),
+              child: CustomButton(
+                buttonText: 'Next',
+                onPressed: sendPhoneNumber,
+              ),
             )
           ]),
         ),

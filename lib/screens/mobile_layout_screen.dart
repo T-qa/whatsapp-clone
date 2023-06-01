@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../common/utils/color.dart';
 
-class MobileScreenLayout extends StatelessWidget {
-  const MobileScreenLayout({super.key});
+class MobileLayoutScreen extends StatelessWidget {
+  const MobileLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

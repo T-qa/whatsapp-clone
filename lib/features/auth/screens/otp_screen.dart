@@ -31,7 +31,7 @@ class OTPScreen extends ConsumerWidget {
             const Text('We have sent an SMS with a code.'),
             SizedBox(
               width: 250,
-              child: TextField(
+              child: TextFormField(
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(
                   hintText: 'Enter code',
@@ -42,7 +42,11 @@ class OTPScreen extends ConsumerWidget {
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value.length == 6) {
-                    verifyOTP(ref, context, value.trim());
+                    verifyOTP(
+                      ref,
+                      context,
+                      value.trim(),
+                    );
                   }
                 },
               ),
