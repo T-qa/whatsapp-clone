@@ -1,3 +1,4 @@
+import 'package:chat_app/features/contacts/screens/contacts_screen.dart';
 import 'package:flutter/material.dart';
 import '../common/utils/color.dart';
 
@@ -68,7 +69,9 @@ class MobileLayoutScreen extends StatelessWidget {
           label: const Text('Send message'),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(25))),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, ContactScreen.routeName);
+          },
           backgroundColor: tabColor,
           icon: const Icon(
             Icons.comment,
