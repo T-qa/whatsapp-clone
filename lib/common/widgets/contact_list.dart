@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../info.dart';
-import '../../screens/mobile_chat_screen.dart';
+import '../../features/chat/screens/mobile_chat_screen.dart';
 import '../utils/color.dart';
 
 class ContactsList extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/features/auth/screens/login_screen.dart';
 import 'package:chat_app/screens/error_screen.dart';
 
-import 'screens/mobile_chat_screen.dart';
+import 'features/chat/screens/mobile_chat_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
