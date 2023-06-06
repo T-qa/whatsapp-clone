@@ -36,7 +36,7 @@ class AuthRepository {
           phoneNumber: phoneNumber,
           timeout: const Duration(seconds: 120),
           verificationCompleted: (PhoneAuthCredential credential) async {
-            await auth.signInWithCredential(credential);
+           // await auth.signInWithCredential(credential);
           },
           verificationFailed: (FirebaseAuthException error) {
             throw Exception(error.message);
@@ -89,7 +89,6 @@ class AuthRepository {
               profilePic,
             );
       }
-
       var user = UserModel(
           name: name,
           uid: uid,
@@ -110,14 +109,17 @@ class AuthRepository {
   }
 
   Stream<UserModel> userData(String userId) {
+    // Return a stream that listens to changes in the 'users' collection and document with the given userId
     return firestore.collection('users').doc(userId).snapshots().map(
           (event) => UserModel.fromMap(
-            event.data()!,
+            event
+                .data()!, // Convert the document snapshot data into a UserModel object
           ),
         );
   }
 
   void setUserState(bool isOnline) async {
+    // Update the 'isOnline' field of the current user's document in the 'users' collection
     await firestore.collection('users').doc(auth.currentUser!.uid).update({
       'isOnline': isOnline,
     });

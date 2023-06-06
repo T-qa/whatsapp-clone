@@ -67,8 +67,9 @@ class MobileLayoutScreen extends StatelessWidget {
         ]),
         floatingActionButton: FloatingActionButton.extended(
           label: const Text('Send message'),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25))),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
           onPressed: () {
             Navigator.pushNamed(context, ContactScreen.routeName);
           },

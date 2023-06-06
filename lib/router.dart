@@ -13,6 +13,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       );
+
     case OTPScreen.routeName:
       final verificationId = settings.arguments as String;
       return MaterialPageRoute(
@@ -20,11 +21,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           verificationId: verificationId,
         ),
       );
+
     case UserInformationScreen.routeName:
       return MaterialPageRoute(
           builder: (context) => const UserInformationScreen());
+
     case ContactScreen.routeName:
       return MaterialPageRoute(builder: (context) => const ContactScreen());
+
     case MobileChatScreen.routeName:
       final arguments = settings.arguments as Map<String, dynamic>;
       final name = arguments['name'];
@@ -34,6 +38,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 name: name,
                 uid: uid,
               ));
+
     default:
       return MaterialPageRoute(
           builder: (context) => const Scaffold(

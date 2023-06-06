@@ -4,6 +4,7 @@ class ChatContact {
   final String contactId;
   final DateTime timeSent;
   final String lastMessage;
+
   ChatContact({
     required this.name,
     required this.profilePic,
