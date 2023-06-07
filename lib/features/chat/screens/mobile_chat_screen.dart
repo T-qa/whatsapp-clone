@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/utils/color.dart';
-import '../../../common/widgets/chat_list.dart';
+import '../widgets/chat_list.dart';
 import '../widgets/bottom_chat_field.dart';
 
 class MobileChatScreen extends ConsumerWidget {
@@ -62,7 +62,9 @@ class MobileChatScreen extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: ChatList(),
+            child: ChatList(
+              receiverUserId: uid,
+            ),
           ),
           BottomChatField(
             receiverUserId: uid,

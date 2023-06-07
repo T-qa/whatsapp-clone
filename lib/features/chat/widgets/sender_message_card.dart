@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/color.dart';
+import '../../../common/utils/color.dart';
 
 class SenderMessageCard extends StatelessWidget {
   const SenderMessageCard({

@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app/features/auth/controller/auth_controller.dart';
+import 'package:chat_app/models/chat_contact.dart';
+import 'package:chat_app/models/message.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,6 +24,18 @@ class ChatController {
     required this.ref,
   });
 
+  Stream<List<ChatContact>> chatContacts() {
+    return chatRepository.getChatContacts();
+  }
+
+  Stream<List<Message>> chatStream(String receiverUserId) {
+    return chatRepository.getChatStream(receiverUserId);
+  }
+
+  //* The function retrieves the current user data using the [userDataAuthProvider] provider.
+  //* Once the data becomes available, it invokes the [chatRepository.sendTextMessage] function
+  //* to send the text message with the provided parameters.
+  //* The [value] parameter represents the retrieved current user data, which is passed as the senderUser.
   void sendTextMessage(
     BuildContext context,
     String receiverUserId,
@@ -33,7 +47,7 @@ class ChatController {
               context: context,
               textMessage: textMessage,
               receiverUserId: receiverUserId,
-              senderUserData: value!, // Current User
+              senderUser: value!, // Current User
             ));
   }
 }
