@@ -25,15 +25,15 @@ class ChatController {
   void sendTextMessage(
     BuildContext context,
     String receiverUserId,
-    String text,
+    String textMessage,
   ) {
     ref
         .read(userDataAuthProvider)
         .whenData((value) => chatRepository.sendTextMessage(
               context: context,
-              text: text,
+              textMessage: textMessage,
               receiverUserId: receiverUserId,
-              senderUser: value!,
+              senderUserData: value!, // Current User
             ));
   }
 }

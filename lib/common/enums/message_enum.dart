@@ -11,7 +11,6 @@ enum MessageEnum {
 
 // Using an extension
 // Enhanced enums
-
 extension ConvertMessage on String {
   MessageEnum toEnum() {
     switch (this) {

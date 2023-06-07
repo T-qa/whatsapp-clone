@@ -24,7 +24,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     nameController.dispose();
   }
 
-  void selecImage() async {
+  void selectImage() async {
     image = await pickImageFromGallery(context);
     setState(() {});
   }
@@ -64,7 +64,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                 bottom: -10,
                 left: 80,
                 child: IconButton(
-                  onPressed: selecImage,
+                  onPressed: selectImage,
                   icon: const Icon(Icons.add_a_photo),
                 ))
           ],

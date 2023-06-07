@@ -3,7 +3,7 @@ import '../common/enums/message_enum.dart';
 
 class Message {
   final String senderId;
-  final String recieverid;
+  final String receiverId;
   final String text;
   final MessageEnum type;
   final DateTime timeSent;
@@ -12,7 +12,7 @@ class Message {
 
   Message({
     required this.senderId,
-    required this.recieverid,
+    required this.receiverId,
     required this.text,
     required this.type,
     required this.timeSent,
@@ -23,7 +23,7 @@ class Message {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'senderId': senderId,
-      'recieverid': recieverid,
+      'receiverid': receiverId,
       'text': text,
       'type': type.type,
       'timeSent': timeSent.millisecondsSinceEpoch,
@@ -35,7 +35,7 @@ class Message {
   factory Message.fromMap(Map<String, dynamic> map) {
     return Message(
       senderId: map['senderId'] as String,
-      recieverid: map['recieverid'] as String,
+      receiverId: map['receiverid'] as String,
       text: map['text'] as String,
       type: (map['type'] as String).toEnum(),
       timeSent: DateTime.fromMillisecondsSinceEpoch(map['timeSent'] as int),

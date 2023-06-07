@@ -27,13 +27,13 @@ class ChatRepository {
 
   void _saveDataToContactsSubcollection(
     UserModel senderUserData,
-    UserModel? recieverUserData,
+    UserModel? receiverUserData,
     String text,
     DateTime timeSent,
     String recieverUserId,
   ) async {
-// users -> reciever user id => chats -> current user id -> set data
-    var recieverChatContact = ChatContact(
+    // users -> reciever user id => chats -> current user id -> set data
+    var receiverChatContact = ChatContact(
       name: senderUserData.name,
       profilePic: senderUserData.profilePic,
       contactId: senderUserData.uid,
@@ -46,13 +46,14 @@ class ChatRepository {
         .collection('chats')
         .doc(auth.currentUser!.uid)
         .set(
-          recieverChatContact.toMap(),
+          receiverChatContact.toMap(),
         );
+
     // users -> current user id  => chats -> reciever user id -> set data
     var senderChatContact = ChatContact(
-      name: recieverUserData!.name,
-      profilePic: recieverUserData.profilePic,
-      contactId: recieverUserData.uid,
+      name: receiverUserData!.name,
+      profilePic: receiverUserData.profilePic,
+      contactId: receiverUserData.uid,
       timeSent: timeSent,
       lastMessage: text,
     );
@@ -72,12 +73,12 @@ class ChatRepository {
     required DateTime timeSent,
     required String messageId,
     required String username,
-    required String? recieverUserName,
+    required String? receiverUserName,
     required MessageEnum messageType,
   }) async {
     final message = Message(
       senderId: auth.currentUser!.uid,
-      recieverid: receiverUserId,
+      receiverId: receiverUserId,
       text: text,
       type: messageType,
       timeSent: timeSent,
@@ -110,35 +111,35 @@ class ChatRepository {
 
   void sendTextMessage({
     required BuildContext context,
-    required String text,
+    required String textMessage,
     required String receiverUserId,
-    required UserModel senderUser,
+    required UserModel senderUserData,
   }) async {
     try {
       var timeSent = DateTime.now();
       UserModel receiverUserData;
-      var userDataMap =
+      var receiverUserDataMap =
           await firestore.collection('users').doc(receiverUserId).get();
-      receiverUserData = UserModel.fromMap(userDataMap.data()!);
+      receiverUserData = UserModel.fromMap(receiverUserDataMap.data()!);
 
       var messageId = const Uuid().v1();
 
       _saveDataToContactsSubcollection(
-        senderUser,
+        senderUserData,
         receiverUserData,
-        text,
+        textMessage,
         timeSent,
         receiverUserId,
       );
 
       _saveMessageToMessageSubcollection(
         receiverUserId: receiverUserId,
-        text: text,
+        text: textMessage,
         timeSent: timeSent,
         messageId: messageId,
-        username: senderUser.name,
+        username: senderUserData.name,
         messageType: MessageEnum.text,
-        recieverUserName: receiverUserData.name,
+        receiverUserName: receiverUserData.name,
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());

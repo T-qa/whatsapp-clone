@@ -12,6 +12,7 @@ class MobileChatScreen extends ConsumerWidget {
   static const routeName = '/mobile-chat-screen';
   final String name;
   final String uid;
+
   const MobileChatScreen({
     super.key,
     required this.name,
