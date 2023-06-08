@@ -13,7 +13,7 @@ class CommonFirebaseStorageRepository {
     required this.firebaseStorage,
   });
 
-  Future<String> storeFiletoFirebase(
+  Future<String> storeFileToFirebase(
     String ref,
     File file,
   ) async {
