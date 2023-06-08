@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:chat_app/features/chat/screens/mobile_chat_screen.dart';

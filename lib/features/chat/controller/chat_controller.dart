@@ -11,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chat_app/features/chat/repositories/chat_repository.dart';
 
 import '../../../common/providers/message_reply_provider.dart';
+import '../../../models/group.dart';
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
@@ -37,6 +38,14 @@ class ChatController {
     return chatRepository.getChatStream(receiverUserId);
   }
 
+  Stream<List<Group>> chatGroups() {
+    return chatRepository.getChatGroups();
+  }
+
+  Stream<List<Message>> groupChatStream(String groupId) {
+    return chatRepository.getGroupChatStream(groupId);
+  }
+
   //* The function retrieves the current user data using the [userDataAuthProvider] provider.
   //* Once the data becomes available, it invokes the [chatRepository.sendTextMessage] function
   //* to send the text message with the provided parameters.
@@ -45,6 +54,7 @@ class ChatController {
     BuildContext context,
     String receiverUserId,
     String textMessage,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
 
@@ -56,24 +66,30 @@ class ChatController {
               receiverUserId: receiverUserId,
               senderUser: value!,
               messageReply: messageReply,
+              isGroupChat: isGroupChat,
             ));
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 
-  void sendFileMessage(BuildContext context, File file, String receiverUserId,
-      MessageEnum messageEnum) {
+  void sendFileMessage(
+    BuildContext context,
+    File file,
+    String receiverUserId,
+    MessageEnum messageEnum,
+    bool isGroupChat,
+  ) {
     final messageReply = ref.read(messageReplyProvider);
     ref
         .read(userDataAuthProvider)
         .whenData((value) => chatRepository.sendFileMessage(
-              context: context,
-              file: file,
-              receiverUserId: receiverUserId,
-              senderUser: value!, // Current User
-              ref: ref,
-              messageEnum: messageEnum,
-              messageReply: messageReply,
-            ));
+            context: context,
+            file: file,
+            receiverUserId: receiverUserId,
+            senderUser: value!, // Current User
+            ref: ref,
+            messageEnum: messageEnum,
+            messageReply: messageReply,
+            isGroupChat: isGroupChat));
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 
@@ -81,6 +97,7 @@ class ChatController {
     BuildContext context,
     String gifUrl,
     String recieverUserId,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
 
@@ -90,12 +107,12 @@ class ChatController {
 
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendGIFMessage(
-            context: context,
-            gifUrl: newGifUrl,
-            recieverUserId: recieverUserId,
-            senderUser: value!,
-            messageReply: messageReply,
-          ),
+              context: context,
+              gifUrl: newGifUrl,
+              receiverUserId: recieverUserId,
+              senderUser: value!,
+              messageReply: messageReply,
+              isGroupChat: isGroupChat),
         );
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }

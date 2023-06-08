@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final getContactsProvider = FutureProvider((ref) {
+  final selectContactRepository = ref.watch(contactRepositoryProvider);
+  return selectContactRepository.getContacts();
+});
+
 final contactControllerProvider = Provider<ContactController>((ref) {
   final contactRepository = ref.watch(contactRepositoryProvider);
   return ContactController(
