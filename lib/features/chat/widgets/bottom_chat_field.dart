@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
+import 'package:chat_app/common/providers/message_reply_provider.dart';
+import 'package:chat_app/features/chat/widgets/message_reply_field.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 import 'package:chat_app/common/utils/color.dart';
@@ -152,8 +154,11 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
   @override
   Widget build(BuildContext context) {
+    final isShowMessageReply = ref.watch(messageReplyProvider);
+
     return Column(
       children: [
+        isShowMessageReply != null ? const MessageReplyField() : const SizedBox(),
         Row(
           children: [
             Expanded(
