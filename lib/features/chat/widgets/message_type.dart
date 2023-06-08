@@ -23,7 +23,15 @@ class MessageType extends StatelessWidget {
             ),
           )
         : msgType == MessageEnum.video
-            ? VideoPlayerItem(videoUrl: message)
-            : CachedNetworkImage(imageUrl: message);
+            ? VideoPlayerItem(
+                videoUrl: message,
+              )
+            : msgType == MessageEnum.gif
+                ? CachedNetworkImage(
+                    imageUrl: message,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: message,
+                  );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:enough_giphy_flutter/enough_giphy_flutter.dart';
+
 
 void showSnackBar({required BuildContext context, required String content}) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
@@ -41,7 +43,7 @@ Future<GiphyGif?> pickGIF(BuildContext context) async {
   try {
     gif = await Giphy.getGif(
       context: context,
-      apiKey: 'pwXu0t7iuNVm8VO5bgND2NzwCpVH9S0F',
+      apiKey: 'Osj803d4N3HouqjIyLoqzjHJUjLq9wv5',
     );
   } catch (e) {
     showSnackBar(context: context, content: e.toString());

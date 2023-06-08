@@ -76,13 +76,13 @@ class ChatRepository {
     });
   }
 
-  void _saveDataToContactsSubcollection(
-    UserModel senderUser,
-    UserModel? receiverUser,
-    String textMessage,
-    DateTime timeSent,
-    String receiverUserId,
-  ) async {
+  void _saveDataToContactsSubcollection({
+    required UserModel senderUser,
+    required UserModel? receiverUser,
+    required String textMessage,
+    required DateTime timeSent,
+    required String receiverUserId,
+  }) async {
     // Create a ChatContact object containing the chat contact information of the sender
     var receiverChatContact = ChatContact(
       name: senderUser.name,
@@ -190,11 +190,11 @@ class ChatRepository {
       var messageId = const Uuid().v1();
 
       _saveDataToContactsSubcollection(
-        senderUser,
-        receiverUser,
-        textMessage,
-        timeSent,
-        receiverUserId,
+        senderUser: senderUser,
+        receiverUser: receiverUser,
+        textMessage: textMessage,
+        timeSent: timeSent,
+        receiverUserId: receiverUserId,
       );
 
       _saveMessageToMessageSubcollection(
@@ -252,11 +252,11 @@ class ChatRepository {
           contactMsgType = 'GIF';
       }
       _saveDataToContactsSubcollection(
-        senderUser,
-        receiverUser,
-        contactMsgType,
-        timeSent,
-        receiverUserId,
+        senderUser: senderUser,
+        receiverUser: receiverUser,
+        textMessage: contactMsgType,
+        timeSent: timeSent,
+        receiverUserId: receiverUserId,
       );
 
       _saveMessageToMessageSubcollection(
@@ -268,6 +268,41 @@ class ChatRepository {
         textMessage: imageUrl,
         timeSent: timeSent,
       );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void sendGIFMessage({
+    required BuildContext context,
+    required String gifUrl,
+    required String recieverUserId,
+    required UserModel senderUser,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      UserModel? receiverUser;
+      var receiverUserData =
+          await firestore.collection('users').doc(recieverUserId).get();
+      receiverUser = UserModel.fromMap(receiverUserData.data()!);
+      var messageId = const Uuid().v1();
+
+      _saveDataToContactsSubcollection(
+        senderUser: senderUser,
+        receiverUser: receiverUser,
+        receiverUserId: receiverUser.uid,
+        textMessage: 'GIF',
+        timeSent: timeSent,
+      );
+
+      _saveMessageToMessageSubcollection(
+          messageId: messageId,
+          messageType: MessageEnum.gif,
+          senderUsername: senderUser.name,
+          receiverUserName: receiverUser.name,
+          receiverUserId: recieverUserId,
+          textMessage: gifUrl,
+          timeSent: timeSent);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }

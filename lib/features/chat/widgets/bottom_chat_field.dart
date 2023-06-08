@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
@@ -62,6 +64,17 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     File? video = await pickVideoFromGallery(context);
     if (video != null) {
       sendFileMessage(video, MessageEnum.video);
+    }
+  }
+
+  void selectGIF() async {
+    final gif = await pickGIF(context);
+    if (gif != null) {
+      ref.read(chatControllerProvider).sendGIFMessage(
+            context,
+            gif.url,
+            widget.receiverUserId,
+          );
     }
   }
 
@@ -134,7 +147,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                           IconButton(
                             icon: const Icon(Icons.gif),
                             color: Colors.grey,
-                            onPressed: () {},
+                            onPressed: selectGIF,
                           ),
                         ],
                       ),
