@@ -1,5 +1,5 @@
 import 'package:chat_app/features/auth/controller/auth_controller.dart';
-import 'package:chat_app/router.dart';
+import 'package:chat_app/routes/router.dart';
 import 'package:chat_app/screens/error_screen.dart';
 import 'package:chat_app/screens/mobile_layout_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/widgets/loader.dart';
 import 'firebase_options.dart';
 import 'common/utils/color.dart';
-import 'package:chat_app/features/landing/screens/landing_sreen.dart';
+import 'package:chat_app/screens/landing_sreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

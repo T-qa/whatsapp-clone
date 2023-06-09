@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/features/auth/screens/login_screen.dart';
 import 'package:chat_app/screens/error_screen.dart';
 
-import 'features/chat/screens/mobile_chat_screen.dart';
-import 'features/group/screens/create_group_screen.dart';
-import 'features/status/screens/confirm_status_screen.dart';
-import 'features/status/screens/status_screen.dart';
-import 'models/status.dart';
+import '../features/chat/screens/mobile_chat_screen.dart';
+import '../features/group/screens/create_group_screen.dart';
+import '../features/status/screens/confirm_status_screen.dart';
+import '../features/status/screens/status_screen.dart';
+import '../models/status.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
