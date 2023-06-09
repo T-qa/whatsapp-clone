@@ -85,17 +85,21 @@ Create a comprehensive Whatsapp clone using Flutter, Firebase, and Riverpod 2.0.
 Follow the steps below to get started with the Flutter Whatsapp Clone project:
 
 1. Clone the repository:
+```bash
 git clone https://github.com/T-qa/whatsapp-clone
-
+```
 2. Navigate to the project directory:
+```bash
 cd flutter-whatsapp-clone
-
+```
 3. Install the dependencies:
+```bash
 flutter pub get
-
+```
 4. Run the app:
+```bash
 flutter run
-
+```
 Make sure you have Flutter SDK installed and set up on your machine before running the app.
 
 
