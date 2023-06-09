@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/utils/color.dart';
 import '../common/utils/utils.dart';
 import '../features/auth/controller/auth_controller.dart';
+import '../features/group/screens/create_group_screen.dart';
 import '../features/status/screens/confirm_status_screen.dart';
 import '../features/status/screens/status_contact_screen.dart';
 
@@ -69,9 +70,29 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.grey),
+              icon: const Icon(
+                Icons.search,
+                color: greyColor,
+              ),
               onPressed: () {},
             ),
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text('Create Group'),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                      context,
+                      CreateGroupScreen.routeName,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
           bottom: TabBar(
             controller: tabBarController,
